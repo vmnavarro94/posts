@@ -1,28 +1,37 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { StyleSheet, Text, View, FlatList } from 'react-native';
 import { ListItem } from '../components';
 
 export default () => {
+  const [loading, setLoading] = useState(true);
+  const [users, setUsers] = useState([]);
+  const fetchUsers = async () => {
+    response = await fetch('https://jsonplaceholder.typicode.com/users');
+    data = await response.json();
+    setUsers(data);
+    setLoading(false);
+  };
+  useEffect(() => {
+    fetchUsers()
+  }, []);
+
   return(
     <View style={styles.container}>
-      <FlatList 
-        style={styles.list}
-        data={users}
-        keyExtractor={user => user.id}
-        renderItem={({ item }) => <ListItem title={item.name}/>}
-      />
+      {
+        loading
+          ?
+            <Text>Loading...</Text>
+          :
+            <FlatList 
+              style={styles.list}
+              data={users}
+              keyExtractor={user => String(user.id)}
+              renderItem={({ item }) => <ListItem title={item.name}/>}
+            />     
+      } 
     </View> 
   );
 }
-
-const users = [
-    { id: 1, name: 'Vin' },
-    { id: 2, name: 'Kelsier' },
-    { id: 3, name: 'Kaladin' },
-    { id: 4, name: 'Dalinar' },
-    { id: 5, name: 'Vivena' },
-];
-
 
 const styles = StyleSheet.create({
   container: {
