@@ -1,11 +1,11 @@
 import React from 'react';
-import { StyleSheet, Text, View, FlatList } from 'react-native';
+import { StyleSheet, Text, TouchableOpacity, FlatList } from 'react-native';
 
-export default ({ title }) => {
+export default ({ title, onPress }) => {
 	return(
-    <View style={styles.container}>
+    <TouchableOpacity onPress={onPress} style={styles.container}>
       <Text style={styles.text}>{title}</Text>
-    </View>
+    </TouchableOpacity>
 	);
 }
 
