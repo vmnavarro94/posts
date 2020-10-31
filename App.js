@@ -9,7 +9,7 @@ const AppNavigator = createStackNavigator({
   Posts: {
     screen: Posts,
   },
-  Detail: {
+  Details: {
     screen: Details,
   },
 }, {

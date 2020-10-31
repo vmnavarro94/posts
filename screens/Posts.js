@@ -4,6 +4,7 @@ import { ListItem } from '../components';
 
 export default ({ navigation }) => {
   const userId = navigation.getParam('user_id');
+  const userName = navigation.getParam('user_name');
   const [loading, setLoading] = useState(true);
   const [posts, setPosts] = useState([]);
   const fetchPosts = async () => {
@@ -26,7 +27,7 @@ export default ({ navigation }) => {
               style={styles.list}
               data={posts}
               keyExtractor={post => String(post.id)}
-              renderItem={({ item }) => <ListItem onPress={() => navigation.navigate('Posts', { user_id: item.id })} title={item.title}/>}
+              renderItem={({ item }) => <ListItem onPress={() => navigation.navigate('Details', { title: item.title, body: item.body, user: userName })} title={item.title}/>}
             />     
       }
     </View> 
